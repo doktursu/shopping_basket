@@ -39,4 +39,12 @@ describe('Customer', function () {
     assert.equal(2, bogofItems['spoon'].quantity);
   });
 
+  it('should be able to return array of bogof discounts', function () {
+    jay.resetBasket();
+    jay.addItems(spoon, spoon, chair, table);
+    var bogofItems = jay.basket.quantifyDiscountItems(jay.basket.items, 'bogof');
+    var bogofDiscounts = jay.basket.bogofDiscounts(bogofItems);
+    assert.equal(1, bogofDiscounts[0]);
+  });
+
 });
