@@ -17,4 +17,10 @@ describe('Customer', function () {
     assert.equal(table, jay.basket.items[1]);
     assert.equal(spoon, jay.basket.items[2]);
   });
+
+  it('should be able to reset basket', function () {
+    jay.resetBasket();
+    assert.equal(undefined, jay.basket.items[0]);
+    assert.equal(0, jay.basket.total);
+  });
 });
