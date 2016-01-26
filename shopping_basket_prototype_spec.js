@@ -12,15 +12,23 @@ describe('Customer', function () {
     assert.equal(chair, jay.basket.items[0]);
   });
 
-  it('should be able to add multiple items to basket', function () {
-    jay.addItems(table, spoon);
-    assert.equal(table, jay.basket.items[1]);
-    assert.equal(spoon, jay.basket.items[2]);
-  });
-
   it('should be able to reset basket', function () {
     jay.resetBasket();
     assert.equal(undefined, jay.basket.items[0]);
     assert.equal(0, jay.basket.total);
   });
+
+  it('should be able to add multiple items to basket', function () {
+    jay.addItems(table, spoon);
+    assert.equal(table, jay.basket.items[0]);
+    assert.equal(spoon, jay.basket.items[1]);
+  });
+
+  it('should be able to calculate total before discount', function () {
+    jay.resetBasket();
+    jay.addItems(spoon, chair)
+    var total = jay.basket.calculateTotal(jay.basket.items)
+    assert.equal(11, total);
+  });
+
 });

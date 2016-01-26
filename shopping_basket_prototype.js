@@ -43,9 +43,9 @@ function Basket() {
 }
 
 Basket.prototype.calculateTotal = function (items) {
-  items.reduce(function (a, b) {
+  return items.reduce(function (a, b) {
     return {price: a.price + b.price};
-  }, 0).price;
+  }).price;
 }
 
 Basket.prototype.calculateBogofDiscount = function (items) {
