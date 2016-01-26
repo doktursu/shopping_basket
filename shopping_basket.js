@@ -1,13 +1,22 @@
+// Items
+
 var chair = {
-  name: chair,
+  name: 'chair',
   discount: 'bogof'
 };
+
+var table = {
+  name: 'table',
+  discount: 'bogof'
+};
+
+// Shopping Basket
 
 var shopping_basket = {
   total: 0,
   items: [],
   addItem: function (item) {
-    items.push(item);
+    this.items.push(item);
   },
   checkout: function () {
     this.applydiscount();
@@ -22,6 +31,8 @@ var shopping_basket = {
   }
 };
 
+// Customer
+
 var customer = {
   name: 'Jay',
   hasDiscountCard: true,
@@ -32,6 +43,8 @@ console.log(customer.basket);
 
 module.exports.customer = customer;
 module.exports.shopping_basket = shopping_basket;
+module.exports.chair = chair;
+
 
 
 
