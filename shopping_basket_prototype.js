@@ -50,7 +50,7 @@ Basket.prototype.calculateTotal = function (items) {
 
 Basket.prototype.calculateBogofDiscount = function (items) {
   var items = this.quantifyDiscountItems(items, 'bogof');
-  var discounts = this.bogofDiscounts(items);
+  var discounts = this.mapDiscounts(items);
   var saving = this.discountTotal(discounts);
   return saving;
 }
@@ -69,9 +69,9 @@ Basket.prototype.quantifyDiscountItems = function (items, discount) {
   return bogofItems;
 }
 
-Basket.prototype.bogofDiscounts = function (bogofItems) {
-  return Object.keys(bogofItems).map(function (itemName) {
-    return Math.floor(bogofItems[itemName].quantity / 2) * bogofItems[itemName].price;
+Basket.prototype.mapDiscounts = function (items) {
+  return Object.keys(items).map(function (itemName) {
+    return Math.floor(items[itemName].quantity / 2) * items[itemName].price;
   });
 }
 

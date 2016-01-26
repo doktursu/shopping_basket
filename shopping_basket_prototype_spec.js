@@ -43,7 +43,7 @@ describe('Customer', function () {
     jay.resetBasket();
     jay.addItems(spoon, spoon, chair, table);
     var bogofItems = jay.basket.quantifyDiscountItems(jay.basket.items, 'bogof');
-    var bogofDiscounts = jay.basket.bogofDiscounts(bogofItems);
+    var bogofDiscounts = jay.basket.mapDiscounts(bogofItems);
     assert.equal(1, bogofDiscounts[0]);
   });
 
