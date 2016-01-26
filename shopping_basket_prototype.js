@@ -25,7 +25,8 @@ Customer.prototype.resetBasket = function () {
 
 Customer.prototype.checkout = function () {
   this.basket.total = this.basket.calculateTotal(this.basket.items);
-  this.basket.total -= this.basket.calculateBogofDiscounts(this.basket.items);
+  this.basket.total -= this.basket.calculateDiscounts(this.basket.items, 'bogof', 2, 1);
+  this.basket.total -= this.basket.calculateDiscounts(this.basket.items, '3for2', 3, 1);
   this.basket.total -= this.basket.calculateOver20Discount(this.basket.total);
   this.basket.total -= this.calculateDiscountCard();
   this.basket.total = Math.round(this.basket.total * 100) / 100;
@@ -48,9 +49,9 @@ Basket.prototype.calculateTotal = function (items) {
   }).price;
 }
 
-Basket.prototype.calculateBogofDiscounts = function (items) {
-  var items = this.quantifyDiscountItems(items, 'bogof');
-  var discounts = this.mapDiscounts(items);
+Basket.prototype.calculateDiscounts = function (items, discountName, buy, getFree) {
+  var items = this.quantifyDiscountItems(items, discountName);
+  var discounts = this.mapDiscounts(items, buy, getFree);
   var saving = this.sumDiscounts(discounts);
   return saving;
 }
@@ -69,9 +70,9 @@ Basket.prototype.quantifyDiscountItems = function (items, discount) {
   return bogofItems;
 }
 
-Basket.prototype.mapDiscounts = function (items) {
+Basket.prototype.mapDiscounts = function (items, buy, getFree) {
   return Object.keys(items).map(function (itemName) {
-    return Math.floor(items[itemName].quantity / 2) * items[itemName].price;
+    return Math.floor(items[itemName].quantity * getFree / buy) * items[itemName].price;
   });
 }
 
@@ -89,6 +90,7 @@ Basket.prototype.calculateOver20Discount = function (total) {
 var chair = new Item('chair', 10, null);
 var table = new Item('table', 60, null);
 var spoon = new Item('spoon', 1, 'bogof');
+var cup = new Item('cup', 3, '3for2')
 
 var jay = new Customer('Jay');
 var val = new Customer('Val');

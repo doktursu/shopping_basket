@@ -43,7 +43,7 @@ describe('Customer', function () {
     jay.resetBasket();
     jay.addItems(spoon, spoon, chair, table);
     var bogofItems = jay.basket.quantifyDiscountItems(jay.basket.items, 'bogof');
-    var bogofDiscounts = jay.basket.mapDiscounts(bogofItems);
+    var bogofDiscounts = jay.basket.mapDiscounts(bogofItems, 2, 1);
     assert.equal(1, bogofDiscounts[0]);
   });
 
@@ -51,7 +51,7 @@ describe('Customer', function () {
     jay.resetBasket();
     jay.addItems(spoon, spoon, chair, table);
     var bogofItems = jay.basket.quantifyDiscountItems(jay.basket.items, 'bogof');
-    var bogofDiscounts = jay.basket.mapDiscounts(bogofItems);
+    var bogofDiscounts = jay.basket.mapDiscounts(bogofItems, 2, 1);
     var saving = jay.basket.sumDiscounts(bogofDiscounts);
     assert.equal(1, saving);
   });
@@ -59,7 +59,7 @@ describe('Customer', function () {
   it('should be able to calculate bogof discounts', function () {
     jay.resetBasket();
     jay.addItems(spoon, spoon, chair, table);
-    var saving = jay.basket.calculateBogofDiscounts(jay.basket.items)
+    var saving = jay.basket.calculateDiscounts(jay.basket.items, 'bogof', 2, 1)
     assert.equal(1, saving);
   });
 
