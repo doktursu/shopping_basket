@@ -11,4 +11,10 @@ describe('Customer', function () {
     jay.addItems(chair);
     assert.equal(chair, jay.basket.items[0]);
   });
+
+  it('should be able to add multiple items to basket', function () {
+    jay.addItems(table, spoon);
+    assert.equal(table, jay.basket.items[1]);
+    assert.equal(spoon, jay.basket.items[2]);
+  });
 });
