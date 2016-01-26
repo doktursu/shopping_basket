@@ -79,12 +79,19 @@ describe('Customer', function () {
     assert.equal(0, saving);
   });
 
-  it('should be able to calculate discount card saving, when not met', function () {
+  it('should return no saving when customer does not have discount card', function () {
     jay.resetBasket();
     jay.addItems(chair, spoon);
     jay.basket.total = jay.basket.calculateTotal(jay.basket.items);
     var saving = jay.calculateDiscountCard(jay.basket.total);
     assert.equal(0, saving);
+  });
+
+  it('should be able to calculate discount card saving', function () {
+    val.addItems(chair, spoon);
+    val.basket.total = val.basket.calculateTotal(val.basket.items);
+    var saving = val.calculateDiscountCard(val.basket.total);
+    assert.equal(0.55, saving);
   });
 
 });
