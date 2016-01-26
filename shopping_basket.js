@@ -15,8 +15,14 @@ var table = {
 var shopping_basket = {
   total: 0,
   items: [],
-  addItem: function (item) {
-    this.items.push(item);
+  addItem: function () {
+    for (var i = 0; i < arguments.length; i++) {
+      this.items.push(arguments[i]);
+    }
+  },
+  resetBasket: function () {
+    this.total = 0;
+    this.items = [];
   },
   checkout: function () {
     this.applydiscount();
@@ -44,6 +50,7 @@ console.log(customer.basket);
 module.exports.customer = customer;
 module.exports.shopping_basket = shopping_basket;
 module.exports.chair = chair;
+module.exports.table = table;
 
 
 
