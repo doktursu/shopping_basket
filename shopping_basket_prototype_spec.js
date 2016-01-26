@@ -31,4 +31,12 @@ describe('Customer', function () {
     assert.equal(11, total);
   });
 
+  it('should be able to quantify bogof items', function () {
+    jay.resetBasket();
+    jay.addItems(spoon, spoon, chair, table);
+    var bogofItems = jay.basket.quantifyDiscountItems(jay.basket.items, 'bogof');
+    assert.equal(1, bogofItems['spoon'].price);
+    assert.equal(2, bogofItems['spoon'].quantity);
+  });
+
 });
