@@ -47,4 +47,13 @@ describe('Customer', function () {
     assert.equal(1, bogofDiscounts[0]);
   });
 
+  it('should be able to total bogof discounts', function () {
+    jay.resetBasket();
+    jay.addItems(spoon, spoon, chair, table);
+    var bogofItems = jay.basket.quantifyDiscountItems(jay.basket.items, 'bogof');
+    var bogofDiscounts = jay.basket.mapDiscounts(bogofItems);
+    var saving = jay.basket.sumDiscounts(bogofDiscounts);
+    assert.equal(1, saving);
+  });
+
 });

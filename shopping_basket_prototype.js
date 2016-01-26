@@ -51,7 +51,7 @@ Basket.prototype.calculateTotal = function (items) {
 Basket.prototype.calculateBogofDiscount = function (items) {
   var items = this.quantifyDiscountItems(items, 'bogof');
   var discounts = this.mapDiscounts(items);
-  var saving = this.discountTotal(discounts);
+  var saving = this.sumDiscounts(discounts);
   return saving;
 }
 
@@ -75,7 +75,7 @@ Basket.prototype.mapDiscounts = function (items) {
   });
 }
 
-Basket.prototype.discountTotal = function (discounts) {
+Basket.prototype.sumDiscounts = function (discounts) {
   return discounts.reduce(function (a, b) {
     return a + b;
   }, 0);
