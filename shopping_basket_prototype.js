@@ -50,29 +50,29 @@ Basket.prototype.calculateTotal = function (items) {
 }
 
 Basket.prototype.calculateDiscounts = function (items, discountName, buy, getFree) {
-  var items = this.quantifyDiscountItems(items, discountName);
-  var discounts = this.mapDiscounts(items, buy, getFree);
+  var quantifiedItems = this.quantifyDiscountItems(items, discountName);
+  var discounts = this.mapDiscounts(quantifiedItems, buy, getFree);
   var saving = this.sumDiscounts(discounts);
   return saving;
 }
 
 Basket.prototype.quantifyDiscountItems = function (items, discount) {
-  var bogofItems = {};
+  var quantifiedItems = {};
   this.items.forEach(function (item) {
     if (item.discount === discount) {
-      if (item.name in bogofItems) {
-        bogofItems[item.name].quantity++;
+      if (item.name in quantifiedItems) {
+        quantifiedItems[item.name].quantity++;
       } else {
-        bogofItems[item.name] = {price: item.price, quantity: 1};
+        quantifiedItems[item.name] = {price: item.price, quantity: 1};
       }
     }
   });
-  return bogofItems;
+  return quantifiedItems;
 }
 
-Basket.prototype.mapDiscounts = function (items, buy, getFree) {
-  return Object.keys(items).map(function (itemName) {
-    return Math.floor(items[itemName].quantity * getFree / buy) * items[itemName].price;
+Basket.prototype.mapDiscounts = function (quantified_items, buy, getFree) {
+  return Object.keys(quantified_items).map(function (itemName) {
+    return Math.floor(quantified_items[itemName].quantity * getFree / buy) * quantified_items[itemName].price;
   });
 }
 
