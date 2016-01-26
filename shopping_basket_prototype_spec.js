@@ -94,4 +94,12 @@ describe('Customer', function () {
     assert.equal(0.55, saving);
   });
 
+  it('should be able to checkout', function () {
+    val.resetBasket();
+    val.addItems(chair, spoon, spoon, spoon, spoon, spoon, table);
+    console.log(val.basket)
+    val.checkout();
+    assert.equal(62.42, val.basket.total);
+  });
+
 });

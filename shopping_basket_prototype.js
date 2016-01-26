@@ -24,11 +24,11 @@ Customer.prototype.resetBasket = function () {
 }
 
 Customer.prototype.checkout = function () {
-  var total = this.basket.total
-  total = this.basket.calculateTotal(this.basket.items);
-  total -= this.basket.calculateBogofDiscounts(this.basket.items);
-  total -= this.basket.calculateOver20Discount(total);
-  total -= this.calculateDiscountCard();
+  this.basket.total = this.basket.calculateTotal(this.basket.items);
+  this.basket.total -= this.basket.calculateBogofDiscounts(this.basket.items);
+  this.basket.total -= this.basket.calculateOver20Discount(this.basket.total);
+  this.basket.total -= this.calculateDiscountCard();
+  this.basket.total = Math.round(this.basket.total * 100) / 100;
 }
 
 Customer.prototype.calculateDiscountCard = function () {
