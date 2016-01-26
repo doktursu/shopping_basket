@@ -79,4 +79,12 @@ describe('Customer', function () {
     assert.equal(0, saving);
   });
 
+  it('should be able to calculate discount card saving, when not met', function () {
+    jay.resetBasket();
+    jay.addItems(chair, spoon);
+    jay.basket.total = jay.basket.calculateTotal(jay.basket.items);
+    var saving = jay.calculateDiscountCard(jay.basket.total);
+    assert.equal(0, saving);
+  });
+
 });
