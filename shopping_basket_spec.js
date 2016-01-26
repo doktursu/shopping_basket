@@ -3,6 +3,7 @@ var shopping_basket = require('./shopping_basket').shopping_basket;
 var chair = require('./shopping_basket').chair;
 var table = require('./shopping_basket').table;
 var spoon = require('./shopping_basket').spoon;
+var customer_with_saving = require('./shopping_basket').customer_with_saving;
 var assert = require('assert');
     
 describe('Customer', function () {
@@ -40,5 +41,16 @@ describe('Customer', function () {
     customer.basket.checkout();
     assert.equal(1, customer.basket.total)
   });
+  it('should be able to apply discount card discount at checkout and have total', function () {
+    customer_with_saving.basket.addItems(chair);
+    customer_with_saving.checkout();
+    assert.equal(9.5, customer_with_saving.basket.total)
+  });
+  // it('should be able to apply multiple discounts at checkout and have total', function () {
+  //   customer_with_saving.basket.resetBasket();
+  //   customer_with_saving.basket.addItems(spoon, spoon, chair, table);
+  //   customer_with_saving.checkout();
+  //   assert.equal(60.705, customer_with_saving.basket.total)
+  // });
 
 });

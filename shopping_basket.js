@@ -74,13 +74,76 @@ var shopping_basket = {
   }
 };
 
+var shoppingBasket2 = {
+  total: 0,
+  items: [],
+  addItems: function () {
+    for (var i = 0; i < arguments.length; i++) {
+      this.items.push(arguments[i]);
+    }
+  },
+  resetBasket: function () {
+    this.total = 0;
+    this.items = [];
+  },
+  applyBogof: function () {
+    var bogofItems = {};
+    this.items.forEach(function (item) {
+      if (item.discount === 'bogof') {
+        if (item.name in bogofItems) {
+          bogofItems[item.name]++;
+        } else {
+          bogofItems[item.name] = 1;
+        }
+      }
+    });
+    var discounts = Object.keys(bogofItems).map(function (itemName) {
+      
+      var foundItem = this.items.find( function (item) {
+        return item.name === itemName;
+      });
+
+      console.log('foundItem', foundItem);
+      console.log('spoon discount', bogofItems[itemName]);
+      return Math.floor(bogofItems[itemName] / 2) * foundItem.price;
+    }.bind(this))
+
+    console.log('discounts', discounts);
+
+    var saving = discounts.reduce(function (a, b){ 
+      return a + b;
+    }, 0);
+
+    console.log('discount', saving);
+    return saving || 0;
+  }
+};
+
 // Customer
 
 var customer = {
   name: 'Jay',
-  hasDiscountCard: true,
+  hasDiscountCard: false,
   basket: shopping_basket
 };
+
+var customer_with_saving = {
+  name: 'Val',
+  hasDiscountCard: true,
+  basket: shoppingBasket2,
+  checkout: function () {
+    this.basket.total = this.basket.items.reduce(function (a, b) {
+      return {price: a.price + b.price};
+    }).price;
+    this.basket.total -= this.basket.applyBogof();
+    if (this.basket.total >= 20) {
+      this.basket.total *= 0.9;
+    }
+    if (this.hasDiscountCard) {
+      this.basket.total *= 0.95;
+    }
+  },
+}
 
 console.log(customer.basket);
 
@@ -89,6 +152,7 @@ module.exports.shopping_basket = shopping_basket;
 module.exports.chair = chair;
 module.exports.table = table;
 module.exports.spoon = spoon;
+module.exports.customer_with_saving = customer_with_saving;
 
 
 
