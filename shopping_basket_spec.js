@@ -5,20 +5,25 @@ var table = require('./shopping_basket').table;
 var assert = require('assert');
     
 describe('Customer', function () {
-  it("should have a shopping basket", function () {
+  it('should have a shopping basket', function () {
     assert.equal(shopping_basket, customer.basket)
   });
-  it("should be able to add an item to the basket", function () {
+  it('should be able to add an item to the basket', function () {
     customer.basket.addItem(chair);
     assert.equal(chair, customer.basket.items[0]);
   });
-  it("should be able reset basket", function () {
+  it('should be able reset basket', function () {
     customer.basket.resetBasket();
     assert.equal(undefined, customer.basket.items[0]);
   });
-  it("should be able to add multiple items to the basket", function () {
+  it('should be able to add multiple items to the basket', function () {
     customer.basket.addItem(chair, table);
     assert.equal(chair, customer.basket.items[0]);
     assert.equal(table, customer.basket.items[1]);
   });
+  it('should be able to checkout and have total', function () {
+    customer.basket.checkout();
+    assert.equal(80, customer.basket.total)
+  })
+
 });

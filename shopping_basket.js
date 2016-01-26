@@ -2,11 +2,13 @@
 
 var chair = {
   name: 'chair',
+  price: 20,
   discount: 'bogof'
 };
 
 var table = {
   name: 'table',
+  price: 60,
   discount: 'bogof'
 };
 
@@ -25,7 +27,10 @@ var shopping_basket = {
     this.items = [];
   },
   checkout: function () {
-    this.applydiscount();
+    //this.applydiscount();
+    this.total = this.items.reduce(function (a, b) {
+      return {price: a.price + b.price};
+    }).price;
   },
   applyDiscounts: function () {
     this.applyBogof();
