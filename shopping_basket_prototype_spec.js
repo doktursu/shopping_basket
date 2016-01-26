@@ -63,12 +63,20 @@ describe('Customer', function () {
     assert.equal(1, saving);
   });
 
-  it('should be able to calculate over 20 discounts', function () {
+  it('should be able to calculate over 20 discount', function () {
     jay.resetBasket();
     jay.addItems(chair, chair);
     jay.basket.total = jay.basket.calculateTotal(jay.basket.items);
     var saving = jay.basket.calculateOver20Discount(jay.basket.total);
     assert.equal(2, saving);
+  });
+
+  it('should be able to calculate over 20 discount, when not met', function () {
+    jay.resetBasket();
+    jay.addItems(chair);
+    jay.basket.total = jay.basket.calculateTotal(jay.basket.items);
+    var saving = jay.basket.calculateOver20Discount(jay.basket.total);
+    assert.equal(0, saving);
   });
 
 });
