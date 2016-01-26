@@ -1,6 +1,7 @@
 var chair = require('./shopping_basket_prototype').chair;
 var table = require('./shopping_basket_prototype').table;
 var spoon = require('./shopping_basket_prototype').spoon;
+var cup = require('./shopping_basket_prototype').cup;
 var jay = require('./shopping_basket_prototype').jay;
 var val = require('./shopping_basket_prototype').val;
 
@@ -97,9 +98,15 @@ describe('Customer', function () {
   it('should be able to checkout', function () {
     val.resetBasket();
     val.addItems(chair, spoon, spoon, spoon, spoon, spoon, table);
-    console.log(val.basket)
     val.checkout();
     assert.equal(62.42, val.basket.total);
+  });
+
+  it('should be able to checkout with 3for2 discounted item', function () {
+    jay.resetBasket();
+    jay.addItems(cup, cup, cup, cup , cup, cup);
+    jay.checkout();
+    assert.equal(12, jay.basket.total);
   });
 
 });

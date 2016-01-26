@@ -1,9 +1,9 @@
-// method helpers
 function Item(name, price, discount) {
   this.name = name;
   this.price = price;
   this.discount = discount;
 }
+
 
 
 function Customer(name) {
@@ -100,6 +100,7 @@ module.exports = {
   chair: chair,
   table: table,
   spoon: spoon,
+  cup: cup,
   jay: jay,
   val: val
 };
