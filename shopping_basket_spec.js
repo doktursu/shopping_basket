@@ -46,11 +46,11 @@ describe('Customer', function () {
     customer_with_saving.checkout();
     assert.equal(9.5, customer_with_saving.basket.total)
   });
-  // it('should be able to apply multiple discounts at checkout and have total', function () {
-  //   customer_with_saving.basket.resetBasket();
-  //   customer_with_saving.basket.addItems(spoon, spoon, chair, table);
-  //   customer_with_saving.checkout();
-  //   assert.equal(60.705, customer_with_saving.basket.total)
-  // });
+  it('should be able to apply multiple discounts at checkout and have total', function () {
+    customer_with_saving.basket.resetBasket();
+    customer_with_saving.basket.addItems(spoon, spoon, chair, table);
+    customer_with_saving.checkout();
+    assert.equal(60.705, customer_with_saving.basket.total)
+  });
 
 });
