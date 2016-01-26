@@ -26,7 +26,7 @@ Customer.prototype.resetBasket = function () {
 Customer.prototype.checkout = function () {
   var total = this.basket.total
   total = this.basket.calculateTotal(this.basket.items);
-  total -= this.basket.calculateBogofDiscount(this.basket.items);
+  total -= this.basket.calculateBogofDiscounts(this.basket.items);
   total -= this.basket.calculateOver20Discount(total);
   total -= this.calculateDiscountCard();
 }
@@ -48,7 +48,7 @@ Basket.prototype.calculateTotal = function (items) {
   }).price;
 }
 
-Basket.prototype.calculateBogofDiscount = function (items) {
+Basket.prototype.calculateBogofDiscounts = function (items) {
   var items = this.quantifyDiscountItems(items, 'bogof');
   var discounts = this.mapDiscounts(items);
   var saving = this.sumDiscounts(discounts);

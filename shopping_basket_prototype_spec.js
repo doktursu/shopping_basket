@@ -56,4 +56,11 @@ describe('Customer', function () {
     assert.equal(1, saving);
   });
 
+  it('should be able to calculate bogof discounts', function () {
+    jay.resetBasket();
+    jay.addItems(spoon, spoon, chair, table);
+    var saving = jay.basket.calculateBogofDiscounts(jay.basket.items)
+    assert.equal(1, saving);
+  });
+
 });
